@@ -11,12 +11,13 @@ enum Camera_Movement
 	BACKWARD,
 	LEFT,
 	RIGHT,
-	UP
+	UP,
+	DOWN
 };
 
 const float YAW = -90.0f;
 const float PITCH = 0.0f;
-const float SPEED = 2.5f;
+const float SPEED = 5.0f;
 const float SENSITIVITY = 0.1f;
 const float ZOOM = 45.0f;
 
@@ -28,6 +29,10 @@ public:
 	glm::vec3 Forward;
 	glm::vec3 Up;
 	glm::vec3 Right;
+	glm::vec3 Right2;
+	glm::vec3 Final_Forward;
+	glm::vec3 Final_Up;
+	glm::vec3 Final_Right;
 	glm::vec3 WorldUp;
 
 	float Yaw;
@@ -37,7 +42,7 @@ public:
 	float MouseSensitivity;
 	float Zoom;
 
-	Camera(glm::vec3 postion = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH) : Front(glm::vec3(0.0, 0.0, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
+	Camera(glm::vec3 postion = glm::vec3(4.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH) : Front(glm::vec3(0.0, 0.0, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
 	{
 		Postion = postion;
 		WorldUp = up;
@@ -55,9 +60,10 @@ public:
 
 		updateCameraVectors();
 	}
-	glm::mat4 GetViewMatrix()
+	void GetViewMatrix()
 	{
-		return glm::lookAt(Postion, Postion + Front, Up);
+		glm::mat4 temp = glm::lookAt(Postion, Postion + Front, Up);
+
 	}
 	void ProcessKeyboard(Camera_Movement direction, float deltaTime)
 	{
@@ -66,13 +72,11 @@ public:
 		float velocity = MovementSpeed * deltaTime;
 		if (direction == FORWARD)
 		{
-			std::cout << "camera-class";
-			Postion += glm::vec3(Front.x,0,Front.z) * velocity;
-			std::cout << Postion.x << Postion.y << Postion.z << "\n" <<std::endl;
+			Postion += glm::vec3(Front.x,Front.y,Front.z) * velocity;
 		}
         if (direction == BACKWARD)
 		{
-			Postion -= glm::vec3(Front.x, 0, Front.z) * velocity;
+			Postion -= glm::vec3(Front.x, Front.y, Front.z) * velocity;
 		}
 		if (direction == LEFT)
 		{
