@@ -25,7 +25,7 @@ A real-time ray marching renderer built from scratch in **C++ with OpenGL**, dri
 - Fragment shader-based ray marching against SDF-defined geometry
 - Basic primitive shapes: spheres, boxes, planes
 - SDF composition: union, subtraction, intersection
-- Lambertian diffuse shading with normal estimation via finite differences
+- FPS controller built within this engine to debug and to move around.
 - Approximate hard shadows via secondary ray marching
 - Multi-pass rendering using Framebuffer Objects (FBO)
 - Sobel edge detection as a post-processing pass on the final output
@@ -80,22 +80,12 @@ This project is far from polished. Here is an honest list of what is lacking:
  
 **Code quality**
 - [ ] Shader code is messy and largely uncommented — needs a full cleanup pass
-- [ ] Magic numbers scattered throughout, need to be extracted into constants/uniforms
-- [ ] No proper abstraction for shaders, FBOs, or scene objects — everything is fairly tangled
 - [ ] C++ side has minimal structure, needs refactoring into cleaner classes/modules
 
 **Rendering limitations**
 - [ ] No acceleration structures — ray marching against complex scenes is slow
-- [ ] Shadows are hard and approximate, no soft shadows or ambient occlusion
-- [ ] No reflections or refractions implemented
-- [ ] No PBR material system — just basic Lambertian diffuse
 - [ ] SDF scene composition is hardcoded in the shader, not configurable at runtime
 
-**Infrastructure**
-- [ ] No proper CMake / build system setup yet
-- [ ] No error handling for shader compilation failures
-- [ ] No camera controls or runtime interaction
-- [ ] No scene file format — everything is baked into the shader
 
 ---
  
@@ -104,9 +94,8 @@ This project is far from polished. Here is an honest list of what is lacking:
 - Physically Based Shading (PBR)
 - Soft shadows and ambient occlusion
 - Reflections via secondary ray marching
-- Proper camera system with movement
 - Migration to Compute Shaders for better control and performance
-- Cleaner codebase with actual documentation
+- Cleaner codebase 
 
 ---
  
