@@ -26,7 +26,6 @@ A real-time ray marching renderer built from scratch in **C++ with OpenGL**, dri
 - Basic primitive shapes: spheres, boxes, planes
 - SDF composition: union, subtraction, intersection
 - FPS controller built within this engine to debug and to move around.
-- Approximate hard shadows via secondary ray marching
 - Multi-pass rendering using Framebuffer Objects (FBO)
 - Sobel edge detection as a post-processing pass on the final output
 
